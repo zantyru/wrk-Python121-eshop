@@ -1,0 +1,35 @@
+Идеи о структуре проекта с точки зрения пользователя и его адресной строки:
+/
+/profile/
+/profile/register/
+/profile/login/
+/profile/logout/
+/profile/changepassword/
+/profile/restorepassword/
+/profile/delete/
+/profile/history/
+/cart/
+/cart/add/
+/cart/remove/
+/cart/increase/
+/cart/decrease/
+/cart/clear/
+/cart/purchase/
+/search/
+/item/
+/item/<id>/
+/item/<id>/specs/
+/item/<id>/feedbacks/
+/category/?c=2:4:566:456
+
+Мысли о моделях:
+Profile - параметры профиля пользователя (расширенные данные о пользователе)
+Purchases - история проведённых покупок (продаж с точки зрения магазина)
+User - пользователь (логин, пароль и прочие первичные данные)
+Item - товар
+ItemType - тип товара
+ItemFeedback - отзыв о товаре
+ItemFeatureType - тип параметра у определённого типа товара
+? ItemFeatureTypeList - какие параметры есть у товара
+Cart - корзина
+Category
