@@ -36,3 +36,6 @@ class ItemsInCategoryView(generic.View):
         )
 
 
+class ItemView(generic.DetailView):
+    model = Item
+    template_name = 'item/detail.html'

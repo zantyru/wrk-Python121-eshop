@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+{% if item %}
+    <h1>{{ item.name }}</h1>
+    <h2>{{ item.price }}</h2>
+    <p>Категория: <a href="{% url 'item:items_in_category' item.item_type.pk %}">{{ item.item_type.name }}</a></p>
+
+    <h3>Характеристики</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Параметр</th>
+                <th>Значение</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for feature in item.features.all %}
+            <tr>
+                <td>{{ feature.feature_type.name }}</td>
+                <td>{{ feature.value }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Отзывы</h3>
+    <table>
+        <tbody>
+            {% for feedback in item.feedbacks.all %}
+            <tr>
+                <td>{{ feedback.ranking }}</td>
+                <td>{{ feedback.message }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Такого товара не существует.</p>
+{% endif %}
+{% endblock %}
