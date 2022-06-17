@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Категория "{{ category_name|default_if_none:'Непонятно что' }}" {% endblock %}
+
+{% block body %}
+<h1>{{ category_name|default_if_none:'Непонятно что' }}</h1>
+{% if items %}
+    <ul>
+        {% for item in items %}
+        <li>{{ item.name }} - {{ item.price }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>В данной категории товаров нет сейчас.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Категории товаров{% endblock %}
+
+{% block body %}
+{% if item_types %}
+    <ul>
+        {% for item_type in item_types %}
+        <li><a href="{% url 'item:items_in_category' item_type.pk %}">{{ item_type.name|capfirst }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Пока никаких категорий товаров не задано. Они скоро появятся.</p>
+{% endif %}
+{% endblock %}

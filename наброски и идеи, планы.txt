@@ -16,11 +16,11 @@
 /cart/clear/
 /cart/purchase/
 /search/
-/item/
+/item/categories/
+/item/categories/<id>/
 /item/<id>/
 /item/<id>/specs/
 /item/<id>/feedbacks/
-/category/?c=2:4:566:456
 
 Мысли о моделях:
 Profile - параметры профиля пользователя (расширенные данные о пользователе)

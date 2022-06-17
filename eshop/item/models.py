@@ -8,6 +8,9 @@ class ItemType(models.Model):
         related_name='item_types', related_query_name='item_type'
     )
 
+    def __str__(self):
+        return f"{self.name}".capitalize()
+
 
 class FeatureType(models.Model):
 
@@ -25,17 +28,23 @@ class FeatureType(models.Model):
         choices=DataType.choices, default=DataType.TEXT
     )
 
+    def __str__(self):
+        return f"{self.name} ({self.data_type})"
+
 
 class ItemFeature(models.Model):
-     item = models.ForeignKey(
-         'Item', on_delete=models.CASCADE,
-         related_name='features', related_query_name='feature'
-     )
-     feature_type = models.ForeignKey(
-         'FeatureType', on_delete=models.CASCADE,
-         related_name='items', related_query_name='item'
-     )
-     value = models.CharField(default='', max_length=64)
+    item = models.ForeignKey(
+     'Item', on_delete=models.CASCADE,
+     related_name='features', related_query_name='feature'
+    )
+    feature_type = models.ForeignKey(
+     'FeatureType', on_delete=models.CASCADE,
+     related_name='items', related_query_name='item'
+    )
+    value = models.CharField(default='', max_length=64)
+
+    def __str__(self):
+        return f"{self.item.name} ({self.feature_type.name}: {self.value})"
 
 
 class Item(models.Model):
@@ -46,6 +55,9 @@ class Item(models.Model):
         related_name='items', related_query_name='item'
     )
 
+    def __str__(self):
+        return self.name
+
 
 class ItemFeedback(models.Model):
     message = models.CharField(default="", max_length=5000)
@@ -55,3 +67,5 @@ class ItemFeedback(models.Model):
         related_name='feedbacks', related_query_name='feedback'
     )
 
+    def __str__(self):
+        return self.message[:30]
