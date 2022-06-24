@@ -2,10 +2,20 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+import pathlib
+import dotenv
+
+
+def load_environment():
+    lookup_dir = pathlib.Path(__file__).resolve().parent.parent
+    dotenv.read_dotenv(lookup_dir / '.env', override=True)
 
 
 def main():
     """Run administrative tasks."""
+
+    load_environment()
+
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'eshop.settings')
     try:
         from django.core.management import execute_from_command_line

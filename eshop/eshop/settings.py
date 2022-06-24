@@ -10,7 +10,18 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
+from django.core.exceptions import ImproperlyConfigured
+
+
+def _required_env(name):
+    """Выбрасывает исключение в случае отсутсвия заданной переменной окружения."""
+    value = os.getenv(name)
+    if value is None:
+        raise ImproperlyConfigured(f'Требуемая переменная окружения "{name}" не задана.')
+    return value
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +31,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-wb4sy%7f*v#vph@(-+_2v8$_!eao++c+nxi7lc&4)gz!zu)rk^'
+SECRET_KEY = _required_env('DJANGO_SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = []
 
@@ -43,6 +54,7 @@ INSTALLED_APPS = [
     'crispy_forms',
 
     # Наши приложения
+    'api',
     'item',
 ]
 

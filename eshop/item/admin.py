@@ -28,6 +28,12 @@ class ItemAdmin(admin.ModelAdmin):
                 'fields': ('name', 'price', ),
             },
         ),
+        (
+            'Категория товара',
+            {
+                'fields': ('item_type', ),
+            },
+        ),
     )
     inlines = (ItemFeatureInline, ItemFeedbackInline, )
 
