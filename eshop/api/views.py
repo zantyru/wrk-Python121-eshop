@@ -13,12 +13,14 @@ ItemFeature = apps.get_model('item', 'ItemFeature')
 class ItemsView(generic.View):
     """
     Формат запроса:
-    {}
+    -отсутствует (потому что GET-запрос)-
 
     Формат ответа:
     {
+        "itemsCount": 424,
         "items" : [
             {
+                "id": 123,
                 "name": "...",
                 "price": "...",
                 "features": [
@@ -49,13 +51,16 @@ class ItemsView(generic.View):
             data = helpers.from_json(request.body)
             # TODO задействовать data
 
+            items = Item.objects.filter()
+
             response = {
+                'itemsCount': Item.objects.count(),
                 'items': []
             }
 
-            items = Item.objects.filter()
             for item in items:
                 item_dict = {
+                    'id': item.pk,
                     'name': item.name,
                     'price': item.price,
                     'features': [],

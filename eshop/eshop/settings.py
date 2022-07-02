@@ -36,6 +36,34 @@ SECRET_KEY = _required_env('DJANGO_SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'console': {
+            'format': '%(name)-12s %(levelname)-8s %(message)s',
+        },
+        'file': {
+            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'formatter': 'file',
+            'filename': 'eshop-debug.log',
+        },
+    },
+    'logger': {
+        '': {
+            'level': 'DEBUG',
+            'handler': ['file'],
+            'propagate': True,
+        },
+    },
+}
+
 ALLOWED_HOSTS = []
 
 
@@ -94,8 +122,14 @@ WSGI_APPLICATION = 'eshop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': _required_env('DJANGO_DB_NAME'),
+        'USER': _required_env('DJANGO_DB_USER'),
+        'PASSWORD': _required_env('DJANGO_DB_PASSWORD'),
+        'HOST': _required_env('DJANGO_DB_HOST'),
+        'PORT': _required_env('DJANGO_DB_PORT'),
     }
 }
 

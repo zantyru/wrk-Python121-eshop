@@ -15,6 +15,15 @@ class CategoriesView(generic.ListView):
     #     return ItemType.objects.filter().orderby('name')
 
 
+class ItemAllView(generic.View):
+
+    def get(self, request, *args, **kwargs):
+        return render(
+            request,
+            template_name='item/all.html'
+        )
+
+
 class ItemsInCategoryView(generic.View):
 
     def get(self, request, category_id, *args, **kwargs):

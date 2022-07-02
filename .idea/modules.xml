@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/wrk-Python121-eshop.iml" filepath="$PROJECT_DIR$/.idea/wrk-Python121-eshop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../wrk-Python121-eshop-desktop/.idea/wrk-Python121-eshop-desktop.iml" filepath="$PROJECT_DIR$/../wrk-Python121-eshop-desktop/.idea/wrk-Python121-eshop-desktop.iml" />
     </modules>
   </component>
 </project>

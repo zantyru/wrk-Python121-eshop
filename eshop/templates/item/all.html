@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Все товары одним списком{% endblock %}
+
+{% block head_extras %}<script>
+"use strict";
+
+function fetchItems()
+{
+    fetch(
+        "{% url 'api_v1:items' %}",
+        {
+            headers: {
+                "Content-Type": "application/json"
+            },
+        }
+    ).then((response) => {
+        if (response.ok) return response.json();
+        throw new Error("Не удалось получить список товаров.");
+    }).then((json) => {
+        let itemList = document.getElementById("all-item-list");
+        let innerHTML = "";
+
+        let items = json["items"];
+        let urlTemplate = "{% url 'item:detail' 0 %}".slice(0, -2);
+
+        for (const elem of items)
+        {
+            let id = elem["id"];
+            let name = elem["name"];
+            let price = elem["price"];
+            let features = elem["features"];
+            innerHTML += `<li><a href="${urlTemplate}${id}/">${name}&nbsp;&mdash; ${price}</a></li>`;
+        }
+
+        itemList.innerHTML += innerHTML;
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+</script>{% endblock %}
+
+{% block body %}
+<h1>Все товары</h1>
+<ul id="all-item-list">
+    {#
+    {% for item in items %}
+    <li><a href="{% url 'item:detail' item.pk %}">{{ item.name }}&nbsp;&mdash; {{ item.price }}</a></li>
+    {% endfor %}
+    #}
+</ul>
+<button onclick="fetchItems()">Показать ещё</button>
+
+{% endblock %}
